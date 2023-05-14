@@ -1,6 +1,7 @@
 import { AppBar, Toolbar, Typography } from '@mui/material'
 import Box from '@mui/material/Box';
 import styled from '@emotion/styled';
+import SearchBox from './SearchBox';
 // import MenuIcon from '@mui/icons-material/Menu';
 
 
@@ -36,21 +37,6 @@ const Navbar = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return (
     <StyledNavbar position="static">
   <Toolbar variant="dense">
@@ -73,7 +59,7 @@ const Navbar = () => {
           />
          </LogoBottom>
     </LogoBox>
-    
+    <SearchBox/>
   </Toolbar> 
 </StyledNavbar>
   )
