@@ -5,7 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 const SearchBox = () => {
   return (
     <Box
-      style={{
+      sx={{
         width: "40%",
         marginLeft: "2%",
         maxWidth: "550px",

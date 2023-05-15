@@ -2,6 +2,7 @@ import { AppBar, Toolbar, Typography } from '@mui/material'
 import Box from '@mui/material/Box';
 import styled from '@emotion/styled';
 import SearchBox from './SearchBox';
+import NavButtons from './NavButtons';
 // import MenuIcon from '@mui/icons-material/Menu';
 
 
@@ -16,6 +17,7 @@ const Navbar = () => {
       "height":"55px",
       "display" :"flex",
       "justifyContent":"center",
+      "box-shadow":"none"
       
   }))
 
@@ -60,6 +62,7 @@ const Navbar = () => {
          </LogoBottom>
     </LogoBox>
     <SearchBox/>
+    <NavButtons/>
   </Toolbar> 
 </StyledNavbar>
   )
