@@ -1,4 +1,4 @@
-import React, { useContext,createContext } from 'react'
+import React, { useContext,createContext, useState } from 'react'
 
 const ContextData = createContext()
 
@@ -7,8 +7,19 @@ export function useContextData (){
 }
 
 const ContextProvider = ({children}) => {
+
+  const [navDrawerOpen,setNavDrawerOpen] = useState(false)
+
+
+  const value = {
+    navDrawerOpen,
+    setNavDrawerOpen
+  }
+
+
+
   return (
-    <ContextData.Provider value={"test"} >
+    <ContextData.Provider value={value} >
       {children}
     </ContextData.Provider>
   )
