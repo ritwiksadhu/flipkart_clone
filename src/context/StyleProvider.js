@@ -29,7 +29,7 @@ const StyleProvider = ({ children }) => {
       border: blue[600],
     },
   }));
-  const Styled_Box = styled(Box)(({ theme }) => ({
+  const NavButtonBoxStyled = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "space-Between",
     alignItems: "center",
@@ -87,12 +87,12 @@ const StyleProvider = ({ children }) => {
     alignItems: "center",
   }));
 
-  const Ham_Button = styled(IconButton)(({ theme }) => ({
+  const HamButton = styled(IconButton)(({ theme }) => ({
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
   }));
-  const Box_styled = styled(Box)(({ theme }) => ({
+  const ProductBoxWrapper = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "center",
     margin: "0 auto",
@@ -104,13 +104,13 @@ const StyleProvider = ({ children }) => {
 
   const value = {
     LoginButton,
-    Styled_Box,
+    NavButtonBoxStyled,
     HtmlTooltip,
     StyledNavbar,
     LogoBox,
     LogoBottom,
-    Ham_Button,
-    Box_styled,
+    HamButton,
+    ProductBoxWrapper,
   };
   return <StyleData.Provider value={value}>{children}</StyleData.Provider>;
 };

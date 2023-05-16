@@ -7,10 +7,12 @@ import NavButtons from "./NavButtons";
 import SearchBox from "./SearchBox";
 // CONTEXT IMPORT
 import { useStyleData } from "../../context/StyleProvider";
+import { useContextData } from "../../context/ContextProvider";
+
 
 const Navbar = () => {
-  const { StyledNavbar, LogoBox, LogoBottom, Ham_Button } = useStyleData();
-
+  const { StyledNavbar, LogoBox, LogoBottom, HamButton } = useStyleData();
+  const { navDrawerOpen,handleNavOpenClose}  = useContextData()
   const logoURL =
     "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/flipkart-plus_8d85f4.png";
 
@@ -20,9 +22,11 @@ const Navbar = () => {
   return (
     <StyledNavbar position="static">
       <Toolbar variant="dense">
-        <Ham_Button>
+        <HamButton
+        onClick = {handleNavOpenClose}
+        >
           <MenuIcon />
-        </Ham_Button>
+        </HamButton>
 
         <LogoBox component="div">
           <img src={logoURL} alt="flipkart logo" style={{ width: "75px" }} />
@@ -40,7 +44,12 @@ const Navbar = () => {
         </LogoBox>
         <SearchBox />
         <NavButtons />
-        <Drawer>{/* Navbutton component goes here */}</Drawer>
+        <Drawer
+        open={navDrawerOpen}
+        onClose={handleNavOpenClose}
+        >
+        <NavButtons />
+        </Drawer>
       </Toolbar>
     </StyledNavbar>
   );

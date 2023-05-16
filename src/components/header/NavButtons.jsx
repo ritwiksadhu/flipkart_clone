@@ -4,10 +4,10 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useStyleData } from "../../context/StyleProvider";
 
 const NavButtons = () => {
-  const { LoginButton, Styled_Box, HtmlTooltip } = useStyleData();
+  const { LoginButton, NavButtonBoxStyled, HtmlTooltip } = useStyleData();
 
   return (
-    <Styled_Box>
+    <NavButtonBoxStyled>
       <HtmlTooltip
         title={
           <Box
@@ -62,7 +62,7 @@ const NavButtons = () => {
           <Box variant="span">Cart</Box>
         </Badge>
       </Button>
-    </Styled_Box>
+    </NavButtonBoxStyled>
   );
 };
 

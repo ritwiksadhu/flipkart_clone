@@ -1,13 +1,11 @@
 // STYLE IMPORT 
 import React from 'react'
-import { Box } from '@mui/material';
 // COMPONENT IMPORT 
 import ProductCategory from './ProductCategory';
 // CONTEXT IMPORT
 import { useStyleData } from '../../context/StyleProvider';
 const ProductCategories = () => {
-    const {Box_styled} = useStyleData()
-
+    const {ProductBoxWrapper} = useStyleData()
 
     const productCategoriesData = [
         { url: 'https://rukminim1.flixcart.com/flap/128/128/image/29327f40e9c4d26b.png?q=100', text: 'Grocery' },
@@ -20,11 +18,11 @@ const ProductCategories = () => {
         { url: 'https://rukminim1.flixcart.com/flap/128/128/image/dff3f7adcf3a90c6.png?q=100', text: 'Beauty, Toys & More' }
     ];
   return (
-    <Box_styled >
+    <ProductBoxWrapper >
         {productCategoriesData.map((element)=>{
             return <ProductCategory data={element} key={element.text}  />
         })}
-    </Box_styled>
+    </ProductBoxWrapper>
   )
 }
 
