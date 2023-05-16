@@ -8,13 +8,16 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import ContextProvider from './context/ContextProvider';
+import StyleProvider from './context/StyleProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ContextProvider>
+      <StyleProvider>
+        <App />
+      </StyleProvider>
 
-    <App />
     </ContextProvider>
   </React.StrictMode>
 );
