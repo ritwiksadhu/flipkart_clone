@@ -15,7 +15,6 @@ const ProductCategories = () => {
     ];
   return (
     <Box 
-    elevated=""
     sx={{
         display:"flex",
         justifyContent:"center",

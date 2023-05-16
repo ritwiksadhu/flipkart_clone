@@ -24,6 +24,8 @@ const NavButtons = () => {
             }
         },
       }));
+
+      // FIX THE HOVER EFFECT
     
   return (
     <Box
