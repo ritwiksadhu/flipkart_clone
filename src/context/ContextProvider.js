@@ -11,12 +11,15 @@ const ContextProvider = ({children}) => {
   const [navDrawerOpen,setNavDrawerOpen] = useState(false)
 
 
-  const value = {
-    navDrawerOpen,
-    setNavDrawerOpen
+  const handleNavOpenClose = ()=>{
+    navDrawerOpen ? setNavDrawerOpen(false):setNavDrawerOpen(true)
+    console.log(navDrawerOpen)
   }
 
-
+  const value = {
+    navDrawerOpen,
+    handleNavOpenClose
+  }
 
   return (
     <ContextData.Provider value={value} >
