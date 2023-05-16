@@ -53,6 +53,7 @@ let carouselImages = [
       carouselImages.map((image,index)=>{
         return <img 
         src={carouselImages[index].url} 
+        key={carouselImages[index].id} 
         style={{
           height:"300px",
           width:"100%",

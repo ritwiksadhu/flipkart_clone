@@ -25,7 +25,7 @@ const ProductCategories = () => {
         padding:".25rem 0"
     }} >
         {productCategoriesData.map((element)=>{
-            return <ProductCategory data={element} />
+            return <ProductCategory data={element} key={element.text}  />
         })}
     </Box>
   )
