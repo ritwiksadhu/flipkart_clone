@@ -48,12 +48,12 @@ const Navbar = () => {
           </LogoBottom>
         </LogoBox>
         <SearchBox />
-        <NavButtons />
+        <NavButtons responsiveClass="large-screen" />
         <Drawer
         open={navDrawerOpen}
         onClose={handleNavOpenClose}
         >
-        <NavButtons />
+        <NavButtons responsiveClass="small-screen"  />
         </Drawer>
       </Toolbar>
     </StyledNavbar>
