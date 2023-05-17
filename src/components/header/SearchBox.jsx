@@ -1,17 +1,15 @@
 import React from "react";
 import { Box, Button, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { useStyleData } from "../../context/StyleProvider";
 
 const SearchBox = () => {
+
+  const {SeatchBoxStyled}  =  useStyleData()
   return (
-    <Box
+    <SeatchBoxStyled
       sx={{
-        width: "40%",
-        marginLeft: "2%",
-        maxWidth: "550px",
-        borderRadius: "2px",
-        overflow: "hidden",
-        display: "flex",
+
       }}
     >
       <InputBase
@@ -38,7 +36,7 @@ const SearchBox = () => {
           }}
         />
       </Button>
-    </Box>
+    </SeatchBoxStyled>
   );
 };
 

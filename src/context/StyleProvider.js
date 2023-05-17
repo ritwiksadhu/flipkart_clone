@@ -23,22 +23,14 @@ const StyleProvider = ({ children }) => {
     textTransform: "capitalize",
     height:"2rem",
     cursor:"pointer",
+    
     "&:hover": {
       color: "#fff",
       backgroundColor: blue[600],
       border: blue[600],
     },
   }));
-  const NavButtonBoxStyled = styled(Box)(({ theme }) => ({
-    display: "flex",
-    justifyContent: "space-Between",
-    alignItems: "center",
-    width: "30%",
-    marginLeft: "2%",
-    [theme.breakpoints.down("md")]: {
-      display: "none",
-    },
-  }));
+
   const HtmlTooltip = styled(({ theme, className, ...props }) => (
     <Tooltip {...props} classes={{ popper: className }} />
   ))(({ theme }) => ({
@@ -57,25 +49,65 @@ const StyleProvider = ({ children }) => {
     },
   }));
 
+  const HamButton = styled(IconButton)(({ theme }) => ({
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  }));
+
   const StyledNavbar = styled(AppBar)(({ theme }) => ({
     backgroundColor: blue[600],
     height: "55px",
-    display: "flex",
-    // flexDirection: "row",
-    justifyContent: "center",
+    justifyContent:"center",
     boxShadow: "none",
     width:"100%",
     border: "1px solid red",
-    // margin: "0",
+    overflow:"hidden",
+    "& > .nav__toolbar-styled":{
+      width:"100%",
+      border:"1px solid blue"
+    }
+
+  }));
+
+  const SeatchBoxStyled = styled(Box)(({ theme }) => ({
+    width: "70%",
+    marginLeft: "2%",
+    maxWidth: "550px",
+    borderRadius: "2px",
+    overflow: "hidden",
+    display: "flex",
+    
+    [theme.breakpoints.up("xm")]:{
+      width:"60%"
+    },
+    [theme.breakpoints.up("md")]:{
+      width:"45%"
+    },
+    [theme.breakpoints.up("sm")]:{
+      width:"30%"
+    },
+    [theme.breakpoints.down("sm")]:{
+      width:"55%"
+    },
   }));
 
   const LogoBox = styled(Box)(({ theme }) => ({
-    marginLeft: "12%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    [theme.breakpoints.down("sm")]: {
-      // marginLeft:"5%"
+    border:"1px solid red",
+    marginLeft:"16%",
+
+    [theme.breakpoints.down("xl")]:{
+      marginLeft:"13%",
+    },
+
+    [theme.breakpoints.down("md")]:{
+      marginLeft:"3%",
+    },
+    [theme.breakpoints.down("sm")]:{
+      marginLeft:"0%",
     },
   }));
 
@@ -87,11 +119,27 @@ const StyleProvider = ({ children }) => {
     alignItems: "center",
   }));
 
-  const HamButton = styled(IconButton)(({ theme }) => ({
+  const NavButtonBoxStyled = styled(Box)(({ theme }) => ({
+    display: "none",
+    alignItems: "center",
+    width: "30%",
+    marginLeft: "2%",
+    [theme.breakpoints.up("sm")]: {
+      display: "flex",
+      width: "50%",
+    },
     [theme.breakpoints.up("md")]: {
-      display: "none",
+      width: "60%",
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: "40%",
+    },
+    [theme.breakpoints.up("xl")]: {
+      width: "30%",
     },
   }));
+
+
   const ProductBoxWrapper = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "center",
@@ -100,7 +148,29 @@ const StyleProvider = ({ children }) => {
     height: "1",
     boxShadow: 1,
     padding: ".25rem 0",
+    overflow:"auto",
+    "&::-webkit-scrollbar" : {
+      display: "none"
+    },
+    [theme.breakpoints.down("lg")]:{
+      width:"80%"
+    }
   }));
+
+  const ProductCategoryCard = styled(Box)(({ theme }) => ({
+    display:"flex",
+    flexDirection:"column",
+    justifyContent:"center",
+    alignItems:"center",
+    height:"100px",
+    width:"80px",
+    flexGrow:"0",
+    flexShrink:"0",
+    whiteSpace:"nowrap",
+    margin:"0 2%",
+  }));
+
+  
 
   const value = {
     LoginButton,
@@ -111,6 +181,8 @@ const StyleProvider = ({ children }) => {
     LogoBottom,
     HamButton,
     ProductBoxWrapper,
+    SeatchBoxStyled,
+    ProductCategoryCard
   };
   return <StyleData.Provider value={value}>{children}</StyleData.Provider>;
 };
