@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, InputBase } from "@mui/material";
+import { Button, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useStyleData } from "../../context/StyleProvider";
 

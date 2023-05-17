@@ -3,12 +3,13 @@ import { Box, Button, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useStyleData } from "../../context/StyleProvider";
 
-const NavButtons = () => {
+const NavButtons = ({responsiveClass}) => {
   const { LoginButton, NavButtonBoxStyled, HtmlTooltip } = useStyleData();
   const [tooltipOpen,setTooltipOpen] = useState(false)
-
   return (
-    <NavButtonBoxStyled>
+    <NavButtonBoxStyled 
+    className={responsiveClass}
+    >
       <HtmlTooltip
         title={
           <Box
@@ -19,9 +20,8 @@ const NavButtons = () => {
             }}
           >
             {/* Buttons goes here */}
-            <Button>test</Button>
-            <Button>test</Button>
-            <Button>test</Button>
+            <Button>Sign out</Button>
+
           </Box>
         }
         arrow
@@ -31,6 +31,7 @@ const NavButtons = () => {
         <LoginButton
         onClick={()=>setTooltipOpen(!tooltipOpen)}
         >Login</LoginButton>
+
       </HtmlTooltip>
       <Button
         disabled

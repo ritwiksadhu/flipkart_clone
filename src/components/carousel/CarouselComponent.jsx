@@ -11,10 +11,7 @@ let carouselImages = [
   { id: 2, url: 'https://rukminim1.flixcart.com/flap/2160/1080/image/57267a180af306fe.jpg?q=50' },
   { id: 3, url: 'https://rukminim1.flixcart.com/flap/2160/1080/image/ae9966569097a8b7.jpg?q=50' },
   { id: 4, url: 'https://rukminim1.flixcart.com/flap/2160/1080/image/f6202f13b6f89b03.jpg?q=50' }
-
 ]
-
-
 
   const responsive = {
     superLargeDesktop: {
@@ -36,7 +33,8 @@ let carouselImages = [
     }
   };
   return <Box sx={{
-    padding:1
+    padding:1,
+
   }}>
 
   <Carousel 
@@ -46,7 +44,6 @@ let carouselImages = [
   autoPlay={true}
   autoPlaySpeed={4000}
   keyBoardControl={true}
-  
   responsive={responsive}
   >
     {

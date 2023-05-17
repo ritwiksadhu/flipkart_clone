@@ -57,15 +57,18 @@ const StyleProvider = ({ children }) => {
 
   const StyledNavbar = styled(AppBar)(({ theme }) => ({
     backgroundColor: blue[600],
+    position:"fixed",
+    top:"0",
+    left:"0",
+    zindex:"2",
     height: "55px",
     justifyContent:"center",
     boxShadow: "none",
     width:"100%",
-    border: "1px solid red",
     overflow:"hidden",
+
     "& > .nav__toolbar-styled":{
       width:"100%",
-      border:"1px solid blue"
     }
 
   }));
@@ -96,7 +99,6 @@ const StyleProvider = ({ children }) => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    border:"1px solid red",
     marginLeft:"16%",
 
     [theme.breakpoints.down("xl")]:{
@@ -120,6 +122,7 @@ const StyleProvider = ({ children }) => {
   }));
 
   const NavButtonBoxStyled = styled(Box)(({ theme }) => ({
+    "&.large-screen":{
     display: "none",
     alignItems: "center",
     width: "30%",
@@ -137,8 +140,18 @@ const StyleProvider = ({ children }) => {
     [theme.breakpoints.up("xl")]: {
       width: "30%",
     },
-  }));
+  },
+    "&.small-screen":{
+      [theme.breakpoints.down("sm")]: {
+        display: "flex",
+        flexDirection:"column",
+        justifyContent:"center",
+        alignItems:"center",
+        width: "15rem",
 
+      },
+    }
+  }));
 
   const ProductBoxWrapper = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -146,9 +159,10 @@ const StyleProvider = ({ children }) => {
     margin: "0 auto",
     width: "1",
     height: "1",
-    boxShadow: 1,
+    marginTop:"52px",
     padding: ".25rem 0",
     overflow:"auto",
+    borderBottom:"1px solid rgba(198,198,198,1)",
     "&::-webkit-scrollbar" : {
       display: "none"
     },
@@ -182,7 +196,7 @@ const StyleProvider = ({ children }) => {
     HamButton,
     ProductBoxWrapper,
     SeatchBoxStyled,
-    ProductCategoryCard
+    ProductCategoryCard,
   };
   return <StyleData.Provider value={value}>{children}</StyleData.Provider>;
 };
