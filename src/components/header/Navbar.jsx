@@ -21,7 +21,12 @@ const Navbar = () => {
 
   return (
     <StyledNavbar position="static">
-      <Toolbar variant="dense">
+      <Toolbar
+      className="nav__toolbar-styled"
+      style={{
+
+      }}
+      variant="dense">
         <HamButton
         onClick = {handleNavOpenClose}
         >

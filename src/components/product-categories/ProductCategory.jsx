@@ -1,24 +1,14 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
+import { useStyleData } from '../../context/StyleProvider'
 
 const ProductCategory = ({data}) => {
 
+  const {ProductCategoryCard} = useStyleData()
     const {url,text} = data
+
   return (
-    <Box 
-    sx={{
-        display:"flex",
-        flexDirection:"column",
-        justifyContent:"center",
-        alignItems:"center",
-        height:"100px",
-        width:"80px",
-        flexGrow:"0",
-        flexShrink:"0",
-        whiteSpace:"nowrap",
-        margin:"0 2rem "
-    }}
-    >
+    <ProductCategoryCard >
       <img src={url} alt={text} 
         style={{
             height:"65px",
@@ -28,7 +18,7 @@ const ProductCategory = ({data}) => {
       <Typography>
         {text}
       </Typography>     
-    </Box>
+    </ProductCategoryCard>
   )
 }
 

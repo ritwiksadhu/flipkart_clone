@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useStyleData } from "../../context/StyleProvider";
 
 const NavButtons = () => {
   const { LoginButton, NavButtonBoxStyled, HtmlTooltip } = useStyleData();
+  const [tooltipOpen,setTooltipOpen] = useState(false)
 
   return (
     <NavButtonBoxStyled>
@@ -24,8 +25,12 @@ const NavButtons = () => {
           </Box>
         }
         arrow
+        open={tooltipOpen}
+        onBlur={()=>setTooltipOpen(false)}
       >
-        <LoginButton>Login</LoginButton>
+        <LoginButton
+        onClick={()=>setTooltipOpen(!tooltipOpen)}
+        >Login</LoginButton>
       </HtmlTooltip>
       <Button
         disabled
