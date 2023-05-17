@@ -160,8 +160,10 @@ const StyleProvider = ({ children }) => {
     width: "1",
     height: "1",
     marginTop:"52px",
+    marginBottom:".25rem",
     padding: ".25rem 0",
     overflow:"auto",
+    backgroundColor:"white",
     borderBottom:"1px solid rgba(198,198,198,1)",
     "&::-webkit-scrollbar" : {
       display: "none"
