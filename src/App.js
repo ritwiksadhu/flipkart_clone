@@ -10,7 +10,7 @@ const App = () => {
       <Navbar/>
       <Routes>
       <Route path='/' element={<HomePage/>} ></Route>
-      <Route path='/search' element={ <SearchedItems/>}></Route>
+      <Route path='/search/:keywordSearched' element={ <SearchedItems/>}></Route>
       </Routes>
     </BrowserRouter>
   )
