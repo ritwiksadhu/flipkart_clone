@@ -1,18 +1,73 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SearchedItem from './SearchedItem'
-import { Box, List, ListItem } from "@mui/material";
+import { Box } from "@mui/material";
 import Button from '@mui/material/Button';
+import { useParams } from 'react-router';
+import { useContextData } from '../../context/ContextProvider';
+import { styled } from "@mui/material/styles";
+
 const SearchedItems = () => {
+
+  const {keywordSearched} = useParams()
+  const [searchResultData,setSearchResultData] = useState({})
+
+  const {roundedPrice} = useContextData()
+
+  useEffect(()=>{
+    async function getProdData (){
+      await fetch(`https://dummyjson.com/products/search?q=${keywordSearched}`)
+      .then(res => res.json())
+      .then(data => setSearchResultData({...data}));
+    }
+    getProdData()
+  },[keywordSearched])
+
+  function sortByStars(){
+    let products = searchResultData.products.sort((a,b)=>b.rating - a.rating)
+    setSearchResultData({...searchResultData,products})
+  }
+  
+  function sortLowToHigh(){
+    let products = searchResultData.products.sort((a,b)=>{
+      let first = roundedPrice(a.price,a.discountPercentage)
+      let second = roundedPrice(b.price,b.discountPercentage)
+      return first - second
+    })
+    setSearchResultData({...searchResultData,products})
+  }
+
+  function sortHighToLow(){
+    let products = searchResultData.products.sort((a,b)=>{
+      let first = roundedPrice(a.price,a.discountPercentage)
+      let second = roundedPrice(b.price,b.discountPercentage)
+      return second - first
+    })
+    setSearchResultData({...searchResultData,products})
+  }
+
+
+  const SearchItemsContainer = styled(Box)(({theme})=>({
+    margin: "58px auto auto auto",
+    width:"60%",
+    alignItems:"center",
+    textAlign:"center",
+    [theme.breakpoints.down("md")]:{
+      width:"90%"
+    },
+    [theme.breakpoints.down("sm")]:{
+      width:"100%"
+    }
+  }))
+  
   return (
-<Box
-sx={{
-  margin: "52px auto auto auto",
-  width:"60%",
-  alignItems:"center",
-  textAlign:"center"
-}}
->
-<p>Showing 1 - 24 of 45 results</p>
+<SearchItemsContainer>
+<p>Showing {" "}
+  {searchResultData.skip +1} - 
+  {searchResultData.limit + searchResultData.skip} of 
+  {" "} {searchResultData.total} results</p>
+
+
+  {/* FILTERING-BUTTONS */}
 <Box
 style={{
   textAlign:"left",
@@ -24,14 +79,16 @@ style={{
 }}
 >
  <p>sort by</p> 
- <Button>Relevance</Button>
- <Button>Stars</Button>
- <Button>price -- low to high</Button>
- <Button>price -- high to low</Button>
- 
+ <Button onClick={sortByStars} >Stars</Button>
+ <Button onClick={sortLowToHigh} >price -- low to high</Button>
+ <Button onClick={sortHighToLow} >price -- high to low</Button>
 </Box>
-<SearchedItem/>
-</Box>
+
+{
+  searchResultData.products?.length >0 ? searchResultData.products.map((element)=> <SearchedItem key={element.id}  data={element}/>):"no data found"
+}
+
+</SearchItemsContainer>
   )
 }
 

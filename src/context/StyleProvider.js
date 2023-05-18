@@ -1,7 +1,7 @@
 import React, { useContext, createContext } from "react";
 import { styled } from "@mui/material/styles";
 import { Button } from "@mui/base";
-import { blue } from "@mui/material/colors";
+import { blue, green } from "@mui/material/colors";
 import { Box } from "@mui/system";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { AppBar, IconButton, Typography } from "@mui/material";
@@ -73,7 +73,7 @@ const StyleProvider = ({ children }) => {
 
   }));
 
-  const SeatchBoxStyled = styled(Box)(({ theme }) => ({
+  const SearchBoxStyled = styled("form")(({ theme }) => ({
     width: "70%",
     marginLeft: "2%",
     maxWidth: "550px",
@@ -186,6 +186,81 @@ const StyleProvider = ({ children }) => {
     margin:"0 2%",
   }));
 
+  const ProductDetailsText = styled(Typography)(({ theme }) => ({
+    fontSize: ".9rem",
+  }));
+  
+  const SearchItemWrapper = styled(Box)(({theme})=>({
+    textAlign: "center",
+    width: "100%",
+    alignSelf: "center",
+    borderBottom: "1px solid rgb(200,200,200)",
+    // display: "flex",
+    // justifyContent: "space-between",
+    display: "grid",
+    gridTemplateColumns: "repeat(5, 1fr)",
+    gridTemplateRows: "1fr",
+    [theme.breakpoints.down("md")]:{
+      gridTemplateColumns: "repeat(3, 1fr)",
+      gridTemplateRows: "repeat(2, 1fr)",
+    }
+  }));
+
+  const ProductDetailsBox = styled(Box)(({ theme }) => ({
+    display: "flex",
+    flexDirection: "column",
+    textAlign: "left",
+    margin: "1rem",
+    width: "60%",
+    gridArea: "1 / 2 / 2 / 5",
+    [theme.breakpoints.down("md")]:{
+      width: "100%",
+      margin: ".25rem",
+    },
+    [theme.breakpoints.down("sm")]:{
+      display:'none'
+    },
+  }));
+
+  const ProductPriceSegment = styled("ul")(({theme}) => ({
+    display: "grid",
+    placeContent: "center",
+    marginRight: "5%",
+    flexShrink: "0",
+    flexGrow: "0",
+    gridArea: "1 / 5 / 2 / 6",
+    [theme.breakpoints.down("sm")]:{
+      gridArea: "1 / 2 / 3 / 4",
+    }
+  }));
+  
+
+  const StarRatingStyle = styled(Box)(({ theme }) => ({
+    background: green[500],
+    color: "white",
+    width: "fit-content",
+    display: "flex",
+    padding: ".1rem .5rem",
+    borderRadius: "3px",
+    fontSize: ".8rem",
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: ".25rem",
+  }));
+
+  const ProductDiscountPrice = styled(Box)(({theme}) => ({
+    display: "inline",
+    color: "green",
+    fontSize: ".8rem",
+    fontWeight: "500",
+    width: "max-content",
+  }));
+  const StrikedProductPrice = styled(Box)(({theme}) => ({
+    textDecoration: "line-through",
+    display: "inline",
+    fontSize: "1.2rem",
+  }));
+
   
 
   const value = {
@@ -197,9 +272,18 @@ const StyleProvider = ({ children }) => {
     LogoBottom,
     HamButton,
     ProductBoxWrapper,
-    SeatchBoxStyled,
+    SearchBoxStyled,
+    ProductDetailsText,
     ProductCategoryCard,
+    SearchItemWrapper,
+    ProductDetailsBox,
+    StarRatingStyle,
+    ProductPriceSegment,
+    ProductDiscountPrice,
+    StrikedProductPrice
   };
+
+
   return <StyleData.Provider value={value}>{children}</StyleData.Provider>;
 };
 
