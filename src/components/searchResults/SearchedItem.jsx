@@ -1,5 +1,7 @@
 import { Box, Typography } from "@mui/material";
+import { green } from "@mui/material/colors";
 import React from "react";
+import StarIcon from '@mui/icons-material/Star';
 
 const SearchedItem = () => {
   const data = {
@@ -27,33 +29,44 @@ const SearchedItem = () => {
     return data.price - result;
   }
 
+  const searchItemWrapper = {
+    textAlign: "center",
+    width: "100%",
+    alignSelf: "center",
+    borderBottom:"1px solid rgb(200,200,200)"
+  }
+
+  const displayImageWrapper = {
+    display: "flex",
+    justifyContent: "space-between",
+  }
+
+  const starRatingStyle = {
+      background: green[500],
+      color: "white",
+      width: "fit-content",
+      display: "flex",
+      flexDirection: "column",
+      padding:".1rem .5rem",
+      borderRadius:"3px",
+      fontSize:".8rem",
+      flexDirection:"row",
+      alignItems:"center"
+  }
+
   return (
     // PARENT BOX
     <Box
-      style={{
-        textAlign: "center",
-        width: "60%",
-        margin: "52px auto auto auto",
-        alignSelf: "center",
-        borderBottom:"1px solid rgb(200,200,200)"
-      }}
+      style={searchItemWrapper}
     >
-      <p>Showing 1 - 24 of 45 results</p>
+     
       {/* CHILD BOX FOR IMAGE */}
       <Box
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
+        style={displayImageWrapper}
       >
         {/* FIRST PART */}
-        <Box
-          style={{
-            padding: ".5rem",
-          }}
-        >
-          <img
-            style={{
+        <Box style={{padding: ".5rem", }}>
+          <img style={{
               width: "150px",
               height: "180px",
               objectfit: "cover",
@@ -69,6 +82,9 @@ const SearchedItem = () => {
             flexDirection: "column",
             textAlign: "left",
             margin: "1rem",
+            width:"60%",
+            // border:"1px solid red",
+
           }}
         >
           {/* STARS */}
@@ -82,18 +98,11 @@ const SearchedItem = () => {
 
             >{data.title}</Typography>
             <Box
-              style={{
-                background: "green",
-                color: "white",
-                width: "fit-content",
-                display: "flex",
-                flexDirection: "column",
-                padding:".1rem .5rem",
-                borderRadius:"3px",
-                fontSize:".7rem"
-              }}
+              sx={starRatingStyle}
             >
-              {data.rating}⭐
+              {data.rating}
+            <StarIcon sx={{fontSize:".8rem",}}/>
+              
             </Box>
           </Box>
           {/* DETAILS BOX */}

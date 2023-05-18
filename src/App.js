@@ -1,18 +1,18 @@
 import React from 'react'
 import Navbar from './components/header/Navbar'
-import ProductCategories from './components/product-categories/ProductCategories'
-import CarouselComponent from './components/carousel/CarouselComponent'
 import SearchedItems from './components/searchResults/SearchedItems'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import HomePage from './components/HomePage'
 
 const App = () => {
   return (
-    <>
+    <BrowserRouter>
       <Navbar/>
-      {/* <ProductCategories/>
-      <CarouselComponent/> */}
-      <SearchedItems/>
-
-    </>
+      <Routes>
+      <Route path='/' element={<HomePage/>} ></Route>
+      <Route path='/search' element={ <SearchedItems/>}></Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
