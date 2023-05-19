@@ -10,6 +10,8 @@ const ContextProvider = ({children}) => {
 
   const [navDrawerOpen,setNavDrawerOpen] = useState(false)
   const [searchKeyword,setSearchKeyword] = useState("")
+  const [searchResultData,setSearchResultData] = useState({})
+
 
   const handleNavOpenClose = ()=>{
     navDrawerOpen ? setNavDrawerOpen(false):setNavDrawerOpen(true)
@@ -20,12 +22,21 @@ const ContextProvider = ({children}) => {
     return price - result;
   }
 
+  async function getProdData (keyword){
+    await fetch(`https://dummyjson.com/products/search?q=${keyword}`)
+    .then(res => res.json())
+    .then(data => setSearchResultData({...data}));
+  }
+
   const value = {
     navDrawerOpen,
     handleNavOpenClose,
     searchKeyword,
     setSearchKeyword,
-    roundedPrice
+    roundedPrice,
+    getProdData,
+    searchResultData,
+    setSearchResultData
   }
 
  

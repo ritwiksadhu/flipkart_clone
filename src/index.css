@@ -8,4 +8,5 @@ html,body{
 }
 body{
     background-color: #f0f4f3;
+    /* overflow: hidden */
 }

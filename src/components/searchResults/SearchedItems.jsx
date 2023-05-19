@@ -9,17 +9,15 @@ import { styled } from "@mui/material/styles";
 const SearchedItems = () => {
 
   const {keywordSearched} = useParams()
-  const [searchResultData,setSearchResultData] = useState({})
+  // const [searchResultData,setSearchResultData] = useState({})
 
-  const {roundedPrice} = useContextData()
+  const {roundedPrice,
+    getProdData,
+    searchResultData,
+    setSearchResultData} = useContextData()
 
   useEffect(()=>{
-    async function getProdData (){
-      await fetch(`https://dummyjson.com/products/search?q=${keywordSearched}`)
-      .then(res => res.json())
-      .then(data => setSearchResultData({...data}));
-    }
-    getProdData()
+    getProdData(keywordSearched)
   },[keywordSearched])
 
   function sortByStars(){
