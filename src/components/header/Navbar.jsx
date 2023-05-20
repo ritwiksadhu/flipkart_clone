@@ -9,6 +9,7 @@ import SearchBox from "./SearchBox";
 import { useStyleData } from "../../context/StyleProvider";
 import { useContextData } from "../../context/ContextProvider";
 import { Link } from "react-router-dom";
+import { styled } from "@mui/material/styles";
 
 
 const Navbar = () => {
@@ -19,6 +20,8 @@ const Navbar = () => {
 
   const subURL =
     "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/plus_aef861.png";
+
+
 
   return (
     <StyledNavbar position="fixed">
