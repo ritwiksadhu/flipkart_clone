@@ -2,14 +2,26 @@ import React, { useState } from "react";
 import { Box, Button, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useStyleData } from "../../context/StyleProvider";
+import { useNavigate } from "react-router-dom";
 
 const NavButtons = ({responsiveClass}) => {
   const { LoginButton, NavButtonBoxStyled, HtmlTooltip } = useStyleData();
   const [tooltipOpen,setTooltipOpen] = useState(false)
+  const userLoggedIn = false
+  
+  const navigate = useNavigate()
+  
+  function logInBtnFunction(){
+    userLoggedIn? setTooltipOpen(!tooltipOpen) : navigate("/login")
+  
+  }
+  
   return (
+    <>
     <NavButtonBoxStyled 
     className={responsiveClass}
     >
+      {userLoggedIn}
       <HtmlTooltip
         title={
           <Box
@@ -30,8 +42,11 @@ const NavButtons = ({responsiveClass}) => {
       >
         <LoginButton
         className="loginBtn"
-        onClick={()=>setTooltipOpen(!tooltipOpen)}
-        >Login</LoginButton>
+        onClick={logInBtnFunction}
+        >
+          {userLoggedIn? "My account" : "Log in"}
+
+        </LoginButton>
 
       </HtmlTooltip>
       <Button
@@ -68,6 +83,7 @@ const NavButtons = ({responsiveClass}) => {
         </Badge>
       </Button>
     </NavButtonBoxStyled>
+    </>
   );
 };
 

@@ -13,6 +13,7 @@ const ContextProvider = ({children}) => {
   const [searchResultData,setSearchResultData] = useState({})
 
 
+
   const handleNavOpenClose = ()=>{
     navDrawerOpen ? setNavDrawerOpen(false):setNavDrawerOpen(true)
     console.log(navDrawerOpen)
@@ -36,7 +37,7 @@ const ContextProvider = ({children}) => {
     roundedPrice,
     getProdData,
     searchResultData,
-    setSearchResultData
+    setSearchResultData,
   }
 
  
