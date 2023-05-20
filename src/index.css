@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 html,body{
     margin: 0;
@@ -8,4 +9,5 @@ html,body{
 }
 body{
     background-color: #f0f4f3;
+    /* overflow: hidden */
 }
