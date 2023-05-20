@@ -3,19 +3,25 @@ import { Box, Button, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useStyleData } from "../../context/StyleProvider";
 import { useContextData } from "../../context/ContextProvider";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import SearchSuggestions from "../searchResults/SearchSuggestions";
 import { blue } from "@mui/material/colors";
 
 const SearchBox = () => {
 
-  const {searchKeyword,setSearchKeyword,getProdData,searchResultData} = useContextData()
+  const {searchKeyword,setSearchKeyword} = useContextData()
   const {SearchBoxStyled}  =  useStyleData()
   const [suggestions,setSuggestions] = useState([])
   const [inputOpen,setInputOpen] = useState(false)
   const navigate = useNavigate()
   useEffect(()=>{
     const timer = setTimeout(() => {
+      
+  async function getSuggestions(){
+    fetch(`https://dummyjson.com/products/search?q=${searchKeyword}&limit=5&select=id,thumbnail,title,price`)
+    .then(res => res.json())
+    .then(data => setSuggestions(data.products));
+  }
       getSuggestions()
     }, 400);
     return ()=>clearTimeout(timer)
@@ -26,11 +32,6 @@ const SearchBox = () => {
     setInputOpen(true)
   }
 
-  async function getSuggestions(){
-    fetch(`https://dummyjson.com/products/search?q=${searchKeyword}&limit=5&select=id,thumbnail,title,price`)
-    .then(res => res.json())
-    .then(data => setSuggestions(data.products));
-  }
 
   function showSearchResults(e){
     e.preventDefault()
