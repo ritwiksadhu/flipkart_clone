@@ -29,6 +29,7 @@ const NavButtons = ({responsiveClass}) => {
         onBlur={()=>setTooltipOpen(false)}
       >
         <LoginButton
+        className="loginBtn"
         onClick={()=>setTooltipOpen(!tooltipOpen)}
         >Login</LoginButton>
 
@@ -39,21 +40,19 @@ const NavButtons = ({responsiveClass}) => {
           background: "transparent",
           whiteSpace: "nowrap",
           textTransform: "capitalize",
-          color: "#fff",
         }}
       >
         Become a Seller
       </Button>
       <Button
         sx={{
-          color: "white",
           textTransform: "capitalize",
         }}
       >
         More
       </Button>
       {/* PUT THE LOGIC FOR THE BADGE NOTIFICATION */}
-      <Button style={{ color: "white", textTransform: "capitalize" }}>
+      <Button >
         <Badge
           sx={{
             "& .MuiBadge-badge": {
