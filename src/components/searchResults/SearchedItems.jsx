@@ -9,18 +9,19 @@ import { styled } from "@mui/material/styles";
 const SearchedItems = () => {
 
   const {keywordSearched} = useParams()
-  const [searchResultData,setSearchResultData] = useState({})
+  const [skip,setSkip] = useState(0)
+  const [nextDisable,setNextDisable] = useState("")
+  const [previousDisable,setPreviousDisable] = useState("")
+  // const [searchResultData,setSearchResultData] = useState({})
 
-  const {roundedPrice} = useContextData()
+  const {roundedPrice,
+    getProdData,
+    searchResultData,
+    setSearchResultData} = useContextData()
 
   useEffect(()=>{
-    async function getProdData (){
-      await fetch(`https://dummyjson.com/products/search?q=${keywordSearched}`)
-      .then(res => res.json())
-      .then(data => setSearchResultData({...data}));
-    }
-    getProdData()
-  },[keywordSearched])
+    getProdData(keywordSearched,setSearchResultData,10,skip)
+  },[keywordSearched,skip])
 
   function sortByStars(){
     let products = searchResultData.products.sort((a,b)=>b.rating - a.rating)
@@ -47,7 +48,7 @@ const SearchedItems = () => {
 
 
   const SearchItemsContainer = styled(Box)(({theme})=>({
-    margin: "58px auto auto auto",
+    margin: "58px auto 2rem auto",
     width:"60%",
     alignItems:"center",
     textAlign:"center",
@@ -58,7 +59,32 @@ const SearchedItems = () => {
       width:"100%"
     }
   }))
+
+  function handleNext(){
+    if((skip+10)<searchResultData.total){
+      setSkip(skip+10)
+      setNextDisable("")
+    }
+    else{
+      setNextDisable(true)
+    }
+    
+  }
   
+  function handlePrevious(){
+    if(skip > 0){
+      setSkip(skip-10)
+      console.log("clicked")
+      setPreviousDisable("")
+      
+    }
+    else{
+      setPreviousDisable(true)
+    }
+
+  }
+
+
   return (
 <SearchItemsContainer>
 <p>Showing {" "}
@@ -87,7 +113,14 @@ style={{
 {
   searchResultData.products?.length >0 ? searchResultData.products.map((element)=> <SearchedItem key={element.id}  data={element}/>):"no data found"
 }
-
+<Button
+onClick={handlePrevious}
+disable={previousDisable}
+>previous</Button>
+<Button
+onClick={handleNext}
+disable={nextDisable}
+>Next</Button>
 </SearchItemsContainer>
   )
 }

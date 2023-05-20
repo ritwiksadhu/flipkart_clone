@@ -1,6 +1,7 @@
 import {Typography } from '@mui/material'
 import React from 'react'
 import { useStyleData } from '../../context/StyleProvider'
+import { Link } from 'react-router-dom'
 
 const ProductCategory = ({data}) => {
 
@@ -8,6 +9,7 @@ const ProductCategory = ({data}) => {
     const {url,text} = data
 
   return (
+        <Link  to={`/search/${text}`} style={{textDecoration:"none",color:"black"}} >
     <ProductCategoryCard >
       <img src={url} alt={text} 
         style={{
@@ -17,8 +19,10 @@ const ProductCategory = ({data}) => {
       />
       <Typography>
         {text}
-      </Typography>     
+      </Typography>    
+ 
     </ProductCategoryCard>
+      </Link>
   )
 }
 

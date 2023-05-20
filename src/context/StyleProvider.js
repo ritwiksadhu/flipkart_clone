@@ -65,7 +65,6 @@ const StyleProvider = ({ children }) => {
     justifyContent:"center",
     boxShadow: "none",
     width:"100%",
-    overflow:"hidden",
 
     "& > .nav__toolbar-styled":{
       width:"100%",
@@ -78,9 +77,9 @@ const StyleProvider = ({ children }) => {
     marginLeft: "2%",
     maxWidth: "550px",
     borderRadius: "2px",
-    overflow: "hidden",
+    // overflow: "hidden",
     display: "flex",
-    
+    position:"relative",
     [theme.breakpoints.up("xm")]:{
       width:"60%"
     },
@@ -153,7 +152,7 @@ const StyleProvider = ({ children }) => {
     }
   }));
 
-  const ProductBoxWrapper = styled(Box)(({ theme }) => ({
+  const ProductCategoryBoxWrapper = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "center",
     margin: "0 auto",
@@ -164,13 +163,15 @@ const StyleProvider = ({ children }) => {
     padding: ".25rem 0",
     overflow:"auto",
     backgroundColor:"white",
+    
     borderBottom:"1px solid rgba(198,198,198,1)",
     "&::-webkit-scrollbar" : {
       display: "none"
     },
     [theme.breakpoints.down("lg")]:{
       width:"80%"
-    }
+    },
+
   }));
 
   const ProductCategoryCard = styled(Box)(({ theme }) => ({
@@ -183,7 +184,10 @@ const StyleProvider = ({ children }) => {
     flexGrow:"0",
     flexShrink:"0",
     whiteSpace:"nowrap",
-    margin:"0 2%",
+    margin:"0 2rem",
+    [theme.breakpoints.down("sm")]:{
+      margin:"0 1rem",
+    }
   }));
 
   const ProductDetailsText = styled(Typography)(({ theme }) => ({
@@ -271,7 +275,7 @@ const StyleProvider = ({ children }) => {
     LogoBox,
     LogoBottom,
     HamButton,
-    ProductBoxWrapper,
+    ProductCategoryBoxWrapper,
     SearchBoxStyled,
     ProductDetailsText,
     ProductCategoryCard,

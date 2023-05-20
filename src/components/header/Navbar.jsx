@@ -8,6 +8,7 @@ import SearchBox from "./SearchBox";
 // CONTEXT IMPORT
 import { useStyleData } from "../../context/StyleProvider";
 import { useContextData } from "../../context/ContextProvider";
+import { Link } from "react-router-dom";
 
 
 const Navbar = () => {
@@ -20,11 +21,11 @@ const Navbar = () => {
     "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/plus_aef861.png";
 
   return (
-    <StyledNavbar position="static">
+    <StyledNavbar position="fixed">
       <Toolbar
       className="nav__toolbar-styled"
       style={{
-
+        zindex:"5"
       }}
       variant="dense">
         <HamButton
@@ -34,6 +35,7 @@ const Navbar = () => {
         </HamButton>
 
         <LogoBox component="div">
+        <Link  to="/" style={{textDecoration:"none",color:"white"}} >
           <img src={logoURL} alt="flipkart logo" style={{ width: "75px" }} />
           <LogoBottom>
             Explore
@@ -46,7 +48,9 @@ const Navbar = () => {
               style={{ height: "10px" }}
             />
           </LogoBottom>
+        </Link>
         </LogoBox>
+
         <SearchBox />
         <NavButtons responsiveClass="large-screen" />
         <Drawer

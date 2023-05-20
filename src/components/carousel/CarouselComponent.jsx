@@ -48,6 +48,10 @@ let carouselImages = [
   keyBoardControl={true}
   
   responsive={responsive}
+  style={{
+    position:"relative",
+    zindex:"-1"
+  }}
   >
     {
       carouselImages.map((image,index)=>{
@@ -57,7 +61,8 @@ let carouselImages = [
         style={{
           height:"300px",
           width:"100%",
-          objectFit:"cover"
+          objectFit:"cover",
+          zindex:"-1"
         }}
         alt=""
          />
