@@ -34,6 +34,7 @@ const SearchBox = () => {
 
   function showSearchResults(e){
     e.preventDefault()
+    closeSuggestions()
     navigate(`/search/${searchKeyword}`)
   }
   function closeSuggestions(){
@@ -77,7 +78,7 @@ const SearchBox = () => {
       >
           {
              inputOpen && suggestions?.map((elem)=>{
-              return <SearchSuggestions data={elem}/>
+              return <SearchSuggestions key={elem.id} data={elem}/>
             })
           }
           {/* hello */}

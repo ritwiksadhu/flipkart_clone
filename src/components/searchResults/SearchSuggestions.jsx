@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 const SearchSuggestions = ({data}) => {
   return (
     <Link to={`/products/${data.id}`}
-      onClick={()=>console.log("link clicked")}
     style={{
       textDecoration:"none",
       color:"black",

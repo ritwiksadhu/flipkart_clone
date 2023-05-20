@@ -22,10 +22,10 @@ const ContextProvider = ({children}) => {
     return price - result;
   }
 
-  async function getProdData (keyword){
-    await fetch(`https://dummyjson.com/products/search?q=${keyword}`)
+  async function getProdData (keyword="",stateToUpdate,limit=10,skip=0){
+    await fetch(`https://dummyjson.com/products/search?q=${keyword}&limit=${limit}&skip=${skip}`)
     .then(res => res.json())
-    .then(data => setSearchResultData({...data}));
+    .then(data => stateToUpdate({...data}));
   }
 
   const value = {
