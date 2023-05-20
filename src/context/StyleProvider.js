@@ -130,7 +130,7 @@ const StyleProvider = ({ children }) => {
       color:"white",
     },
     "& .loginBtn":{
-      color:"white",
+      color:blue[800],
 
     },
     [theme.breakpoints.up("sm")]: {
