@@ -2,14 +2,26 @@ import React, { useState } from "react";
 import { Box, Button, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useStyleData } from "../../context/StyleProvider";
+import { useNavigate } from "react-router-dom";
 
 const NavButtons = ({responsiveClass}) => {
   const { LoginButton, NavButtonBoxStyled, HtmlTooltip } = useStyleData();
   const [tooltipOpen,setTooltipOpen] = useState(false)
+  const userLoggedIn = false
+  
+  const navigate = useNavigate()
+  
+  function logInBtnFunction(){
+    userLoggedIn? setTooltipOpen(!tooltipOpen) : navigate("/login")
+  
+  }
+  
   return (
+    <>
     <NavButtonBoxStyled 
     className={responsiveClass}
     >
+      {userLoggedIn}
       <HtmlTooltip
         title={
           <Box
@@ -29,8 +41,12 @@ const NavButtons = ({responsiveClass}) => {
         onBlur={()=>setTooltipOpen(false)}
       >
         <LoginButton
-        onClick={()=>setTooltipOpen(!tooltipOpen)}
-        >Login</LoginButton>
+        className="loginBtn"
+        onClick={logInBtnFunction}
+        >
+          {userLoggedIn? "My account" : "Log in"}
+
+        </LoginButton>
 
       </HtmlTooltip>
       <Button
@@ -39,21 +55,19 @@ const NavButtons = ({responsiveClass}) => {
           background: "transparent",
           whiteSpace: "nowrap",
           textTransform: "capitalize",
-          color: "#fff",
         }}
       >
         Become a Seller
       </Button>
       <Button
         sx={{
-          color: "white",
           textTransform: "capitalize",
         }}
       >
         More
       </Button>
       {/* PUT THE LOGIC FOR THE BADGE NOTIFICATION */}
-      <Button style={{ color: "white", textTransform: "capitalize" }}>
+      <Button >
         <Badge
           sx={{
             "& .MuiBadge-badge": {
@@ -69,6 +83,7 @@ const NavButtons = ({responsiveClass}) => {
         </Badge>
       </Button>
     </NavButtonBoxStyled>
+    </>
   );
 };
 

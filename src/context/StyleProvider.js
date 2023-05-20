@@ -68,8 +68,7 @@ const StyleProvider = ({ children }) => {
 
     "& > .nav__toolbar-styled":{
       width:"100%",
-    }
-
+    },
   }));
 
   const SearchBoxStyled = styled("form")(({ theme }) => ({
@@ -92,6 +91,7 @@ const StyleProvider = ({ children }) => {
     [theme.breakpoints.down("sm")]:{
       width:"55%"
     },
+
   }));
 
   const LogoBox = styled(Box)(({ theme }) => ({
@@ -126,6 +126,13 @@ const StyleProvider = ({ children }) => {
     alignItems: "center",
     width: "30%",
     marginLeft: "2%",
+    "& button":{
+      color:"white",
+    },
+    "& .loginBtn":{
+      color:blue[800],
+
+    },
     [theme.breakpoints.up("sm")]: {
       display: "flex",
       width: "50%",
@@ -141,13 +148,26 @@ const StyleProvider = ({ children }) => {
     },
   },
     "&.small-screen":{
+      display:"none",
       [theme.breakpoints.down("sm")]: {
         display: "flex",
         flexDirection:"column",
         justifyContent:"center",
         alignItems:"center",
         width: "15rem",
+        transition:"all 1s ease",
 
+        "& button":{
+          color:"black",
+          borderBottom:"1px solid rgb(220,220,220)",
+          width:'98%',
+          marginTop:"2rem",
+          "&.loginBtn":{
+            border:"none",
+            background:"#ff9f00",
+            color:"white"
+          },
+        },
       },
     }
   }));
@@ -264,8 +284,6 @@ const StyleProvider = ({ children }) => {
     display: "inline",
     fontSize: "1.2rem",
   }));
-
-  
 
   const value = {
     LoginButton,
