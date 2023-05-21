@@ -7,10 +7,8 @@ import { Link } from "react-router-dom";
 
 const LogInPage = () => {
   const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
 
 
   const handleEmailChange = (event) => {
@@ -20,23 +18,9 @@ const LogInPage = () => {
   };
   
   const validateEmail = (email) => {
-    // Use a regular expression to validate the email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-
-  const validatePasswords = () => {
-    return passwordRef.current.value === passwordConfirmRef.current.value;
-  };
-  
-  const handlePasswordChange = () => {
-  setPasswordError(!validatePasswords());
-};
-
-const handleConfirmPasswordChange = () => {
-  setPasswordError(!validatePasswords());
-};
-  
 
   return (
     // outer box
@@ -132,18 +116,6 @@ const handleConfirmPasswordChange = () => {
             label="Password"
             type="password"
             inputRef={passwordRef}
-            onChange={handlePasswordChange}
-            error={passwordError}
-            helperText={passwordError ? 'Passwords do not match' : ''}            autoComplete="current-password"
-          />
-          <TextField
-            id="outlined-password-input"
-            inputRef={passwordConfirmRef}
-            onChange={handleConfirmPasswordChange}
-            error={passwordError}
-            label="Confirm Password"
-            type="password"
-            autoComplete="current-password"
           />
           <Button style={{
             border:"1px solid rgb(210,210,210)",
