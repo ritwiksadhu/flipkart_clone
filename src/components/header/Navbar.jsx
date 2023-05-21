@@ -9,7 +9,6 @@ import SearchBox from "./SearchBox";
 import { useStyleData } from "../../context/StyleProvider";
 import { useContextData } from "../../context/ContextProvider";
 import { Link } from "react-router-dom";
-import { styled } from "@mui/material/styles";
 
 
 const Navbar = () => {

@@ -285,6 +285,36 @@ const StyleProvider = ({ children }) => {
     fontSize: "1.2rem",
   }));
 
+
+  // AUTH COMPONENT STYLES
+
+  const AuthComponentOuterWrappers = styled(Box)(({theme})=>({
+
+  }))
+  const AuthComponentInnerWrappers = styled(Box)(({theme})=>({
+
+  }))
+  const AuthLeftSegment = styled(Box)(({theme})=>({
+
+  }))
+  const AuthLeftHeader = styled(Typography)(({theme})=>({
+
+  }))
+  const AuthLeftPara = styled(Typography)(({theme})=>({
+    fontSize: "1.2rem",
+    margin: "1rem",
+  }))
+  const AuthRightwrapper = styled(Typography)(({theme})=>({
+
+  }))
+  const AuthRightForm = styled(Typography)(({theme})=>({
+
+  }))
+  const SubmitBtnStyle = styled(Button)(({theme})=>({
+
+  }))
+
+
   const value = {
     LoginButton,
     NavButtonBoxStyled,
@@ -302,7 +332,15 @@ const StyleProvider = ({ children }) => {
     StarRatingStyle,
     ProductPriceSegment,
     ProductDiscountPrice,
-    StrikedProductPrice
+    StrikedProductPrice,
+    AuthComponentOuterWrappers,
+    AuthComponentInnerWrappers,
+    AuthLeftSegment,
+    AuthLeftHeader,
+    AuthLeftPara,
+    AuthRightwrapper,
+    AuthRightForm,
+    SubmitBtnStyle,
   };
 
 
