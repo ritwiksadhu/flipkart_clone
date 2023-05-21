@@ -101,7 +101,6 @@ const LogInPage = () => {
         >
 
           <TextField
-            id="outlined-password-input"
             label="Email"
             type="email"
             autoComplete="current-password"
@@ -112,7 +111,6 @@ const LogInPage = () => {
           />
 
           <TextField
-            id="outlined-password-input"
             label="Password"
             type="password"
             inputRef={passwordRef}
