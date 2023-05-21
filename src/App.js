@@ -7,7 +7,10 @@ import ProductPageComponent from './components/Product-Page/ProductPageComponent
 import LogInPage from "./components/AuthComponents/LogInPage"
 import SignUpPage from "./components/AuthComponents/SignUpPage"
 import FotgotPasswordPage from "./components/AuthComponents/ForgotPasswordPage"
+import { app } from './components/firebase/firebase'
 const App = () => {
+
+  console.log(app)
   return (
     <BrowserRouter>
       <Navbar/>
