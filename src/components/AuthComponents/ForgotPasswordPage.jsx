@@ -1,14 +1,12 @@
-import { Alert, AlertTitle, Box, Button, FormControl, Typography } from "@mui/material";
-import React, { useRef, useState } from "react";
+import { Alert, AlertTitle, Box, Button, FormControl } from "@mui/material";
+import React, {useState } from "react";
 import TextField from "@mui/material/TextField";
 import { blue } from "@mui/material/colors";
 import { Link } from "react-router-dom";
 
 const ForgotPasswordPage = () => {
-  const passwordRef = useRef();
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
 
   const handleEmailChange = (event) => {
     const newEmail = event.target.value;

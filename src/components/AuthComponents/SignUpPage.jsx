@@ -6,10 +6,8 @@ import { Link } from "react-router-dom";
 
 const LogInPage = () => {
   const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
 
   const handleEmailChange = (event) => {
     const newEmail = event.target.value;
