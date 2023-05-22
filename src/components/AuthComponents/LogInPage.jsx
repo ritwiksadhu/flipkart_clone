@@ -1,15 +1,19 @@
-import { Box, Button, FormControl, Typography } from "@mui/material";
+import { Alert, AlertTitle, Box, Button, Typography } from "@mui/material";
 import React, { useRef, useState } from "react";
 import TextField from "@mui/material/TextField";
 import { blue } from "@mui/material/colors";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
+import { useAuthData } from "../../context/AuthProvider";
+import { auth } from "../../firebase/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 
 const LogInPage = () => {
   const passwordRef = useRef();
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
-
+  const {errorState,setErrorState} =  useAuthData()
+  const navigate = useNavigate()
 
   const handleEmailChange = (event) => {
     const newEmail = event.target.value;
@@ -22,6 +26,21 @@ const LogInPage = () => {
     return emailRegex.test(email);
   };
 
+
+  async function handleSubmit(e){
+    e.preventDefault()
+    await signInWithEmailAndPassword(auth, email, passwordRef.current.value)
+    .then((userCredential) => {
+      console.log("user logged in")
+      setErrorState(false)
+      navigate("/")
+      
+    })
+    .catch((error) => {
+      setErrorState(true)
+    });
+  }
+
   return (
     // outer box
     <Box
@@ -32,6 +51,7 @@ const LogInPage = () => {
         width: "100vw",
       }}
     >
+
       {/* wrapper box */}
       <Box
         sx={{
@@ -76,6 +96,7 @@ const LogInPage = () => {
           />
         </Box>
         {/* right */}
+
         <Box
         sx={{
           width:"50%",
@@ -87,8 +108,17 @@ const LogInPage = () => {
         }}
         
         >
-
-        <FormControl
+    <Box
+      style={{
+        height:"3rem"
+      }}
+      >
+      {errorState && <Alert severity="error">
+        <AlertTitle> Log in failed</AlertTitle>
+      </Alert>}
+      </Box>
+        <form
+        onSubmit={e=>handleSubmit(e)}
           action=""
           style={{
             display: "flex",
@@ -96,6 +126,7 @@ const LogInPage = () => {
             justifyContent: "space-between",
             height: "70%",
             width: "100%",
+            marginTop:"2rem",
             marginBottom:"1rem",
           }}
         >
@@ -120,7 +151,7 @@ const LogInPage = () => {
             background:"#fb641b",
             color:'white'
           }} type="submit">Log in</Button>
-        </FormControl>
+        </form>
         <Link to={"/signup"}
         style={{
           textDecoration:"none",

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { auth } from '../firebase/firebase'
-import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 
 
 const AuthData = createContext()
@@ -12,6 +12,7 @@ const AuthProvider = ({children}) => {
 
   const [currentUser,setCurrentUser] = useState()
   const [protectedLoading,setProtectedLoading] = useState()
+  const [errorState,setErrorState] = useState(false)
 
 
 
@@ -31,9 +32,14 @@ const AuthProvider = ({children}) => {
     await signOut(auth).then(() => {
       console.log("sign out successfull")
       setCurrentUser(false)
+      setErrorState(false)
     }).catch((error) => {
-      // An error happened.
-    });
+        setErrorState(true)
+      });
+    }
+    
+    async function signInFunction(email,password){
+
   }
 
 
@@ -43,7 +49,9 @@ const AuthProvider = ({children}) => {
   const data = {
     protectedLoading,
     currentUser,
-    signOutFunction
+    signOutFunction,
+    errorState,
+    setErrorState
   }  
   return (
     <AuthData.Provider value={data}>
