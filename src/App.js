@@ -7,8 +7,8 @@ import ProductPageComponent from './components/Product-Page/ProductPageComponent
 import LogInPage from "./components/AuthComponents/LogInPage"
 import SignUpPage from "./components/AuthComponents/SignUpPage"
 import ForgotPasswordPage from "./components/AuthComponents/ForgotPasswordPage"
-const App = () => {
 
+const App = () => {
   return (
     <BrowserRouter>
       <Navbar/>

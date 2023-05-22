@@ -3,25 +3,32 @@ import { Box, Button, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useStyleData } from "../../context/StyleProvider";
 import { useNavigate } from "react-router-dom";
+import { useAuthData } from "../../context/AuthProvider";
 
 const NavButtons = ({responsiveClass}) => {
   const { LoginButton, NavButtonBoxStyled, HtmlTooltip } = useStyleData();
   const [tooltipOpen,setTooltipOpen] = useState(false)
-  const userLoggedIn = false
+  const {currentUser,signOutFunction} = useAuthData()
   
   const navigate = useNavigate()
   
   function logInBtnFunction(){
-    userLoggedIn? setTooltipOpen(!tooltipOpen) : navigate("/login")
-  
+    currentUser? setTooltipOpen(!tooltipOpen) : navigate("/login")
   }
+
+  function tooltipClose(){
+    setTimeout(() => {
+      setTooltipOpen(false)
+    }, 300);
+  }
+
   
   return (
     <>
     <NavButtonBoxStyled 
     className={responsiveClass}
     >
-      {userLoggedIn}
+      {/* {userLoggedIn} */}
       <HtmlTooltip
         title={
           <Box
@@ -32,19 +39,21 @@ const NavButtons = ({responsiveClass}) => {
             }}
           >
             {/* Buttons goes here */}
-            <Button>Sign out</Button>
+            <Button
+            onClick={signOutFunction}
+            >Sign out</Button>
 
           </Box>
         }
         arrow
         open={tooltipOpen}
-        onBlur={()=>setTooltipOpen(false)}
+        onBlur={tooltipClose}
       >
         <LoginButton
         className="loginBtn"
         onClick={logInBtnFunction}
         >
-          {userLoggedIn? "My account" : "Log in"}
+          {currentUser? "My account" : "Log in"}
 
         </LoginButton>
 

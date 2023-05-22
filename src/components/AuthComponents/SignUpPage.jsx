@@ -50,8 +50,7 @@ const handleConfirmPasswordChange = () => {
       await createUserWithEmailAndPassword(auth,email,passwordRef.current.value)
       .then((userCredential) => {
         console.log("user created")
-        const user = userCredential.user;
-        // navigate("/")
+        navigate("/")
         setDisableSubmit()
     })
     .catch(() => {setDisableSubmit()});
