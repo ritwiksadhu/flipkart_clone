@@ -3,10 +3,14 @@ import React, {useState } from "react";
 import TextField from "@mui/material/TextField";
 import { blue } from "@mui/material/colors";
 import { Link } from "react-router-dom";
+import {sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
+  const [successMsg,setSuccessMsg] = useState(false)
+  const [errorMsg,setErrorMsg] = useState(false)
 
   const handleEmailChange = (event) => {
     const newEmail = event.target.value;
@@ -19,6 +23,17 @@ const ForgotPasswordPage = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
+
+  async function handleSubmit(e){
+    e.preventDefault()
+    sendPasswordResetEmail(auth, email)
+    .then(() => {
+      setSuccessMsg(true)
+    })
+    .catch((error) => {
+      setErrorMsg(false)
+    });
+  }
 
   return (
     // outer box
@@ -34,12 +49,17 @@ const ForgotPasswordPage = () => {
         height:"3rem"
       }}
       >
-      <Alert severity="success">
+    {successMsg && <Alert severity="success">
         <AlertTitle>Password Reset Link Sent Successfully </AlertTitle>
       </Alert>
+      }
+    {errorMsg && <Alert severity="error">
+        <AlertTitle>please check your email and try again </AlertTitle>
+      </Alert>
+      }
       </Box>
 
-          <FormControl
+          <form
             action=""
             style={{
               display: "flex",
@@ -50,6 +70,7 @@ const ForgotPasswordPage = () => {
               marginBottom: "1rem",
               borderBottom: "1px solid rgb(210,210,210)",
             }}
+            onSubmit={e=>handleSubmit(e)}
           >
             <TextField
               id="outlined-password-input"
@@ -72,7 +93,7 @@ const ForgotPasswordPage = () => {
             >
               Reset Password
             </Button>
-          </FormControl>
+          </form>
           <Link
             to={"/login"}
             style={{

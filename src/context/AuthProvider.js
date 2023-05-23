@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { auth } from '../firebase/firebase'
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import {db} from "../firebase/firebase"
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 
 
 const AuthData = createContext()
@@ -15,11 +17,33 @@ const AuthProvider = ({children}) => {
   const [errorState,setErrorState] = useState(false)
 
 
+  let docRef
+  let docSnap
+  async function getting(user){
+    docRef = doc(db, "user",user.uid);
+    docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+    } else {
+      console.log("No such document!");
+      await setDoc(docRef, {
+        createdBy:user.uid,
+        cart:[]
+      })
+      docSnap = await getDoc(docRef);
+    }
+  }
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUser(user);
+        // TESTING GROUND
+        getting(user)
+
+        // TESTING GROUND
       } else {
         setCurrentUser(false);
       }
@@ -38,9 +62,6 @@ const AuthProvider = ({children}) => {
       });
     }
     
-    async function signInFunction(email,password){
-
-  }
 
 
 
