@@ -9,7 +9,7 @@ const NavButtons = ({responsiveClass}) => {
   const { LoginButton, NavButtonBoxStyled, HtmlTooltip } = useStyleData();
   const [tooltipOpen,setTooltipOpen] = useState(false)
   const {currentUser,signOutFunction} = useAuthData()
-  
+  const {cart} = useAuthData()
   const navigate = useNavigate()
   
   function logInBtnFunction(){
@@ -21,6 +21,7 @@ const NavButtons = ({responsiveClass}) => {
       setTooltipOpen(false)
     }, 300);
   }
+
 
   
   return (
@@ -84,7 +85,7 @@ const NavButtons = ({responsiveClass}) => {
               backgroundColor: "red",
             },
           }}
-          badgeContent={0}
+          badgeContent={cart.length}
           max={9}
         >
           <ShoppingCartIcon />

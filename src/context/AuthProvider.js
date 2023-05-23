@@ -11,12 +11,13 @@ export function useAuthData(){
 }
 
 const AuthProvider = ({children}) => {
-
+  
   const [currentUser,setCurrentUser] = useState()
   const [protectedLoading,setProtectedLoading] = useState()
   const [errorState,setErrorState] = useState(false)
-
-
+  // can delete this, 
+  const [cart,setCart] = useState()
+  
   let docRef
   let docSnap
   async function getting(user){
@@ -24,7 +25,8 @@ const AuthProvider = ({children}) => {
     docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
+      // console.log("Document data:", docSnap.data());
+      setCart(docSnap.data().cart)
     } else {
       console.log("No such document!");
       await setDoc(docRef, {
@@ -34,7 +36,6 @@ const AuthProvider = ({children}) => {
       docSnap = await getDoc(docRef);
     }
   }
-
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -61,18 +62,15 @@ const AuthProvider = ({children}) => {
         setErrorState(true)
       });
     }
-    
-
-
-
-
 
   const data = {
     protectedLoading,
     currentUser,
     signOutFunction,
     errorState,
-    setErrorState
+    setErrorState,
+    cart,
+    setCart
   }  
   return (
     <AuthData.Provider value={data}>
