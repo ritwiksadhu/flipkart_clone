@@ -6,7 +6,8 @@ import HomePage from './components/HomePage'
 import ProductPageComponent from './components/Product-Page/ProductPageComponent'
 import LogInPage from "./components/AuthComponents/LogInPage"
 import SignUpPage from "./components/AuthComponents/SignUpPage"
-import FotgotPasswordPage from "./components/AuthComponents/ForgotPasswordPage"
+import ForgotPasswordPage from "./components/AuthComponents/ForgotPasswordPage"
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -17,7 +18,7 @@ const App = () => {
       <Route path='/products/:productId' element={ <ProductPageComponent/>}></Route>
       <Route path='/login' element={ <LogInPage/>}></Route>
       <Route path='/signup' element={ <SignUpPage/> }></Route>
-      <Route path='/forgotPassword' element={ <FotgotPasswordPage/> }></Route>
+      <Route path='/forgotPassword' element={ <ForgotPasswordPage/> }></Route>
       <Route path='/products/:productId' element={ <ProductPageComponent/>}></Route>
       </Routes>
     </BrowserRouter>

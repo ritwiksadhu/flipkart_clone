@@ -1,17 +1,19 @@
-import { Box, Button, FormControl, Typography } from "@mui/material";
+import { Alert, AlertTitle, Box, Button, Typography } from "@mui/material";
 import React, { useRef, useState } from "react";
 import TextField from "@mui/material/TextField";
 import { blue } from "@mui/material/colors";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
+import { useAuthData } from "../../context/AuthProvider";
+import { auth } from "../../firebase/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 
 const LogInPage = () => {
   const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-
+  const {errorState,setErrorState} =  useAuthData()
+  const navigate = useNavigate()
 
   const handleEmailChange = (event) => {
     const newEmail = event.target.value;
@@ -20,23 +22,24 @@ const LogInPage = () => {
   };
   
   const validateEmail = (email) => {
-    // Use a regular expression to validate the email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
-  const validatePasswords = () => {
-    return passwordRef.current.value === passwordConfirmRef.current.value;
-  };
-  
-  const handlePasswordChange = () => {
-  setPasswordError(!validatePasswords());
-};
 
-const handleConfirmPasswordChange = () => {
-  setPasswordError(!validatePasswords());
-};
-  
+  async function handleSubmit(e){
+    e.preventDefault()
+    await signInWithEmailAndPassword(auth, email, passwordRef.current.value)
+    .then((userCredential) => {
+      console.log("user logged in")
+      setErrorState(false)
+      navigate("/")
+      
+    })
+    .catch((error) => {
+      setErrorState(true)
+    });
+  }
 
   return (
     // outer box
@@ -48,6 +51,7 @@ const handleConfirmPasswordChange = () => {
         width: "100vw",
       }}
     >
+
       {/* wrapper box */}
       <Box
         sx={{
@@ -92,6 +96,7 @@ const handleConfirmPasswordChange = () => {
           />
         </Box>
         {/* right */}
+
         <Box
         sx={{
           width:"50%",
@@ -103,8 +108,17 @@ const handleConfirmPasswordChange = () => {
         }}
         
         >
-
-        <FormControl
+    <Box
+      style={{
+        height:"3rem"
+      }}
+      >
+      {errorState && <Alert severity="error">
+        <AlertTitle> Log in failed</AlertTitle>
+      </Alert>}
+      </Box>
+        <form
+        onSubmit={e=>handleSubmit(e)}
           action=""
           style={{
             display: "flex",
@@ -112,12 +126,12 @@ const handleConfirmPasswordChange = () => {
             justifyContent: "space-between",
             height: "70%",
             width: "100%",
+            marginTop:"2rem",
             marginBottom:"1rem",
           }}
         >
 
           <TextField
-            id="outlined-password-input"
             label="Email"
             type="email"
             autoComplete="current-password"
@@ -128,29 +142,16 @@ const handleConfirmPasswordChange = () => {
           />
 
           <TextField
-            id="outlined-password-input"
             label="Password"
             type="password"
             inputRef={passwordRef}
-            onChange={handlePasswordChange}
-            error={passwordError}
-            helperText={passwordError ? 'Passwords do not match' : ''}            autoComplete="current-password"
-          />
-          <TextField
-            id="outlined-password-input"
-            inputRef={passwordConfirmRef}
-            onChange={handleConfirmPasswordChange}
-            error={passwordError}
-            label="Confirm Password"
-            type="password"
-            autoComplete="current-password"
           />
           <Button style={{
             border:"1px solid rgb(210,210,210)",
             background:"#fb641b",
             color:'white'
           }} type="submit">Log in</Button>
-        </FormControl>
+        </form>
         <Link to={"/signup"}
         style={{
           textDecoration:"none",

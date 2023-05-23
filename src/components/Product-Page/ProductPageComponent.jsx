@@ -7,11 +7,19 @@ import { useContextData } from "../../context/ContextProvider";
 import { useStyleData } from "../../context/StyleProvider";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import { green } from "@mui/material/colors";
+import { useAuthData } from "../../context/AuthProvider";
+import { db } from "../../firebase/firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 const ProductPageComponent = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState();
   const { roundedPrice } = useContextData();
   const { StarRatingStyle } = useStyleData();
+
+  const [itemIncluded,setItemIncluded] = useState(false)
+
+
+  const {cart,setCart,currentUser} = useAuthData()
   useEffect(() => {
     (async function () {
       await fetch(`https://dummyjson.com/products/${productId}`)
@@ -57,6 +65,43 @@ const ProductPageComponent = () => {
     },
   }));
 
+  useEffect(()=>{
+      if(cart && product){
+        cart.forEach(elem => {
+          if(elem.id == product.id){
+            setItemIncluded(true)
+          }
+        });
+        console.log(cart)
+      }
+
+  },[cart,product])
+
+async function addItemToCart(){
+  let docRef = doc(db, "user",currentUser.uid);
+  await setDoc(docRef, {
+    createdBy:currentUser.uid,
+    cart:[...cart,product]
+  })
+  .then(()=>{
+    setCart([...cart,product])
+    console.log("item added")})
+  .catch(()=>console.log("item not added"))
+}
+
+async function removeItemFromCart(){
+  let docRef = doc(db, "user",currentUser.uid);
+  let dummy = cart.filter(item=> item.id !== product.id)
+  await setDoc(docRef, {
+    createdBy:currentUser.uid,
+    cart:[...dummy]
+  })
+  .then(()=>{
+    setCart([...dummy])
+    setItemIncluded(false)
+    console.log("item removed")})
+  .catch(()=>console.log("item not removed"))
+}
   return (
     <>
       <ProductWrapper>
@@ -64,9 +109,16 @@ const ProductPageComponent = () => {
           <img src={product?.images[0]} alt="" />
           <Box>
             <ProductPageButtons className="buyNow">Buy Now </ProductPageButtons>
-            <ProductPageButtons className="addToCart">
+          {itemIncluded?<ProductPageButtons 
+          onClick={removeItemFromCart}
+          className="addToCart">
+              remove from cart
+            </ProductPageButtons> :
+            <ProductPageButtons
+            onClick={addItemToCart}
+            className="addToCart">
               Add to Cart
-            </ProductPageButtons>
+            </ProductPageButtons>}
           </Box>
         </Box>
         <Box className="right">
