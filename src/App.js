@@ -7,6 +7,8 @@ import ProductPageComponent from './components/Product-Page/ProductPageComponent
 import LogInPage from "./components/AuthComponents/LogInPage"
 import SignUpPage from "./components/AuthComponents/SignUpPage"
 import ForgotPasswordPage from "./components/AuthComponents/ForgotPasswordPage"
+import ProtectedRoute from './components/protectedRoute/ProtectedRoute'
+import Cart from './components/Cart'
 
 const App = () => {
   return (
@@ -20,6 +22,7 @@ const App = () => {
       <Route path='/signup' element={ <SignUpPage/> }></Route>
       <Route path='/forgotPassword' element={ <ForgotPasswordPage/> }></Route>
       <Route path='/products/:productId' element={ <ProductPageComponent/>}></Route>
+      <Route path='/cart' element={ <ProtectedRoute><Cart/></ProtectedRoute>}></Route>
       </Routes>
     </BrowserRouter>
   )
