@@ -19,8 +19,9 @@ const ContextProvider = ({children}) => {
     console.log(navDrawerOpen)
   }
   function roundedPrice(price,discount) {
-    let result = Math.round((price * discount) / 100);
-    return price - result;
+    let result = (price * discount) / 100
+    
+    return result
   }
 
   async function getProdData (keyword="",stateToUpdate,limit=10,skip=0){
