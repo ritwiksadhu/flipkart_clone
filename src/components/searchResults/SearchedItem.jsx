@@ -4,6 +4,8 @@ import StarIcon from "@mui/icons-material/Star";
 import { Link } from "react-router-dom";
 import { useContextData } from "../../context/ContextProvider";
 import { useStyleData } from "../../context/StyleProvider";
+import Paper from '@mui/material/Paper';
+
 
 const SearchedItem = ({ data }) => {
   const { roundedPrice } = useContextData();
@@ -80,7 +82,7 @@ const SearchedItem = ({ data }) => {
         <ProductPriceSegment>
           <Box style={{ textAlign: "left" }}>
             <Typography variant="h4" style={{ fontSize: "1.5rem" }}>
-              ${roundedPrice(data.price, data.discountPercentage)}
+              ${roundedPrice(data.price, data.discountPercentage).toFixed(2)}
             </Typography>
             <Box>
               <StrikedProductPrice variant="h6">

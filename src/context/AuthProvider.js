@@ -41,17 +41,35 @@ const AuthProvider = ({children}) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUser(user);
-        // TESTING GROUND
-        getting(user)
-
-        // TESTING GROUND
+        getting(user).then(() => {
+          setProtectedLoading(false);
+        });
       } else {
         setCurrentUser(false);
+        setProtectedLoading(false);
       }
-      setProtectedLoading(false);
     });
-    return ()=>unsubscribe()
+  
+    return unsubscribe;
   },[])
+
+  
+  async function removeItemFromCart(element,setItemIncluded=null) {
+    let docRef = doc(db, "user", currentUser.uid);
+    let dummy = cart.filter((item) => item.id !== element.id);
+    await setDoc(docRef, {
+      createdBy: currentUser.uid,
+      cart: [...dummy],
+    })
+      .then(() => {
+        setCart([...dummy]);
+        if(setItemIncluded !== null){
+          setItemIncluded(false);
+        }
+        console.log("item removed");
+      })
+      .catch(() => console.log("item not removed"));
+  }
 
   const signOutFunction = async () => {
     await signOut(auth).then(() => {
@@ -70,7 +88,9 @@ const AuthProvider = ({children}) => {
     errorState,
     setErrorState,
     cart,
-    setCart
+    setCart,
+    protectedLoading,
+    removeItemFromCart
   }  
   return (
     <AuthData.Provider value={data}>
