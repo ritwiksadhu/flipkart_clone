@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Button, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useStyleData } from "../../context/StyleProvider";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthData } from "../../context/AuthProvider";
 
 const NavButtons = ({responsiveClass}) => {
@@ -77,7 +77,12 @@ const NavButtons = ({responsiveClass}) => {
         More
       </Button>
       {/* PUT THE LOGIC FOR THE BADGE NOTIFICATION */}
-      <Button >
+      <Link to={"/cart"}
+      style={{
+        textDecoration:"none",
+        color:"white"
+      }}
+      >
         <Badge
           sx={{
             "& .MuiBadge-badge": {
@@ -85,13 +90,13 @@ const NavButtons = ({responsiveClass}) => {
               backgroundColor: "red",
             },
           }}
-          badgeContent={cart.length}
+          badgeContent={cart?.length}
           max={9}
         >
           <ShoppingCartIcon />
           <Box variant="span">Cart</Box>
         </Badge>
-      </Button>
+      </Link>
     </NavButtonBoxStyled>
     </>
   );
