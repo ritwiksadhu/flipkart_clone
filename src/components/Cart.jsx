@@ -117,6 +117,34 @@ const Cart = () => {
           .catch(() => console.log("item not removed"));
       }
 
+if(cart?.length === 0){
+    return <Box 
+    style={{
+
+        backgroundColor:"white",
+        height:"100vh",
+        width:"100vw",
+        display:"grid",
+        placeContent:"center"
+    }}
+     >
+        <Box style={{textAlign:"center"}}
+        >
+        <img height="250px"  src="https://rukminim1.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90" class="_2giOt4"></img>
+        <Typography 
+        style={{ fontSize:"1.2rem",marginTop:"1rem"}}>
+            Your Cart is empty!
+        </Typography>
+        <Typography 
+        style={{ fontSize:".8rem",marginTop:"1rem"}}>
+           Add items to it Now!
+        </Typography>
+        </Box>
+    </Box>
+}
+
+
+
   return (
     <>
 
