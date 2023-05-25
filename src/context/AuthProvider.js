@@ -40,13 +40,15 @@ const AuthProvider = ({children}) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setCurrentUser(user);
         getting(user).then(() => {
+          console.log("got user")
           setProtectedLoading(false);
+          setCurrentUser(user);
         });
       } else {
-        setCurrentUser(false);
+        console.log("not got user")
         setProtectedLoading(false);
+        setCurrentUser(false);
       }
     });
   
