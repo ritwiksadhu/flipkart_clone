@@ -69,6 +69,7 @@ const ProductPageComponent = () => {
     width: "97%",
     margin: "58px auto 0 auto",
     background: "fff",
+
     ".left": {
       width: "40%",
       marginLeft: "2rem",
@@ -82,6 +83,17 @@ const ProductPageComponent = () => {
     ".right": {
       width:"60%",
       margin: "1rem",
+    },
+    [theme.breakpoints.down("md")]:{
+      flexDirection:"column",
+      ".left":{
+        width:"100%",
+        margin:"0",
+      },
+      ".right":{
+        margin:"0",
+        width:"100%"
+      },
     },
   }));
 
