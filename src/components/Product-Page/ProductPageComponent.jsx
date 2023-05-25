@@ -32,7 +32,8 @@ const ProductPageComponent = () => {
         .then((data) => {
           setProduct({ ...data })
           setActiveImage(data.images[0])
-        });
+        })
+        .catch(()=>setProduct(null))
     })();
     // getProductDetails()
   }, []);
@@ -144,7 +145,22 @@ const ProductPageComponent = () => {
       })
       .catch(() => console.log("item not removed"));
   }
-
+  if(!product){
+    return <Box 
+    style={{
+        backgroundColor:"#ECF0F3",
+        height:"100vh",
+        width:"100vw",
+        display:"grid",
+        placeContent:"center"
+    }}
+     >
+        <Box style={{textAlign:"center"}}
+        >
+          <img height="500px" src="https://cdn.dribbble.com/users/3512533/screenshots/14168376/media/1357b33cb4057ecb3c6f869fc977561d.jpg?compress=1&resize=1000x750&vertical=top" alt="" />
+        </Box>
+    </Box>
+}
 
 
 
