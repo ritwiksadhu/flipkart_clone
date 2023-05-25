@@ -4,9 +4,11 @@ import { useAuthData } from '../context/AuthProvider'
 import Paper from '@mui/material/Paper';
 import {useContextData} from "../context/ContextProvider"
 import { styled } from "@mui/material/styles";
+import { db } from '../firebase/firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 const Cart = () => {
-    const {cart,removeItemFromCart} = useAuthData()
+    const {cart,removeItemFromCart,currentUser,setCart} = useAuthData()
     const {roundedPrice} =  useContextData()
 
     const [totalPrice,setTotalPrice] = useState(0)
@@ -95,16 +97,25 @@ const Cart = () => {
         top:"80vh",
         height:"5rem",
         width:"80%",
-        border:"1px solid red",
-        margin:"0 5%",
+        margin:"0 10%",
         display:"flex",
         justifyContent:"space-between",
         alignItems:"center",
         padding:"0 1rem"
     }))
 
-    
-
+    async function orderNowFunction() {
+        let docRef = doc(db, "user", currentUser.uid);
+        await setDoc(docRef, {
+          createdBy: currentUser.uid,
+          cart: [],
+        })
+          .then(() => {
+            setCart([]);
+            console.log("items ordered");
+          })
+          .catch(() => console.log("item not removed"));
+      }
 
   return (
     <>
@@ -192,7 +203,7 @@ const Cart = () => {
             { "$ " + (actualPrice)?.toFixed(2)}/-
           </Typography>
         </Box>
-        <Button style={{background:"#fb641b",color:"white",borderRadius:"0"}} >Order Now</Button>
+        <Button onClick={orderNowFunction} style={{background:"#fb641b",color:"white",borderRadius:"0"}} >Order Now</Button>
     </OrderNow>
     </>
   )
