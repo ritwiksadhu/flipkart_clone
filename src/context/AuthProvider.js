@@ -25,10 +25,8 @@ const AuthProvider = ({children}) => {
     docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      // console.log("Document data:", docSnap.data());
       setCart(docSnap.data().cart)
     } else {
-      console.log("No such document!");
       await setDoc(docRef, {
         createdBy:user.uid,
         cart:[]
@@ -41,12 +39,10 @@ const AuthProvider = ({children}) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         getting(user).then(() => {
-          console.log("got user")
-          setProtectedLoading(false);
           setCurrentUser(user);
+          setProtectedLoading(false);
         });
       } else {
-        console.log("not got user")
         setProtectedLoading(false);
         setCurrentUser(false);
       }
@@ -68,16 +64,14 @@ const AuthProvider = ({children}) => {
         if(setItemIncluded !== null){
           setItemIncluded(false);
         }
-        console.log("item removed");
       })
-      .catch(() => console.log("item not removed"));
   }
 
   const signOutFunction = async () => {
     await signOut(auth).then(() => {
-      console.log("sign out successfull")
       setCurrentUser(false)
       setErrorState(false)
+      setCart([])
     }).catch((error) => {
         setErrorState(true)
       });

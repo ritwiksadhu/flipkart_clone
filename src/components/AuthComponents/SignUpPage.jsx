@@ -171,7 +171,7 @@ const handleConfirmPasswordChange = () => {
           }} 
           type="submit"
           disabled= {disableSubmit}
-          >Log in</Button>
+          >Sign up</Button>
         </form>
         <Link to={"/login"}
         style={{

@@ -129,13 +129,13 @@ style={{
   searchResultData.products?.length >0 ? searchResultData.products.map((element)=> <SearchedItem key={element.id}  data={element}/>):"no data found"
 }
 {
-  searchResultData.products?.length > 10 ? <Button
+  searchResultData.products?.length <= 10 ? <Button
   onClick={handlePrevious}
   disable={previousDisable}
   >previous</Button> :""
 }
 {
-  searchResultData.products?.length > 10 ? 
+  searchResultData.products?.length >= 10 ? 
   <Button
   onClick={handleNext}
   disable={nextDisable}

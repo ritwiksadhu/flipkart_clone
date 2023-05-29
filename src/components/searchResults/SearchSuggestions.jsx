@@ -1,8 +1,14 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import { useStyleData } from '../../context/StyleProvider'
+ 
 const SearchSuggestions = ({data}) => {
+
+  const {SearchedSuggestionWrapper} =  useStyleData()
+
+
+
   return (
     <Link to={`/products/${data.id}`}
     style={{
@@ -10,14 +16,7 @@ const SearchSuggestions = ({data}) => {
       color:"black",
     }}
     >
-    <Box
-    style={{
-        height:"fit-content",
-        display:"flex",
-        alignItems:"center",
-        marginTop:".5rem"
-    }}
-    >
+    <SearchedSuggestionWrapper>
 
         <img src={data.thumbnail} alt={data.title} 
         style={{
@@ -30,7 +29,7 @@ const SearchSuggestions = ({data}) => {
         />
         <Typography variant='p'>{data.title}</Typography>
 
-    </Box>
+    </SearchedSuggestionWrapper>
   </Link>
   )
 }

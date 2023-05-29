@@ -36,19 +36,18 @@ const ProductPageComponent = () => {
         .catch(()=>setProduct(null))
     })();
     // getProductDetails()
-  }, []);
+  }, [productId]);
 
   
   useEffect(() => {
     if (cart && product) {
       cart.forEach((elem) => {
-        if (elem.id == product.id) {
+        if (elem.id === product.id) {
           setItemIncluded(true);
         }
       });
-      console.log(cart);
     }
-  }, [cart, product]);
+  }, [cart,product]);
 
   const handleImageHover = (image) => {
     if (!isThrottled) {
@@ -57,7 +56,6 @@ const ProductPageComponent = () => {
 
       setTimeout(() => {
         setIsThrottled(false);
-        console.log("we are ready again")
       }, 300);
     }
   };
@@ -123,9 +121,9 @@ const ProductPageComponent = () => {
       })
         .then(() => {
           setCart([...cart, product]);
-          console.log("item added");
+         
         })
-        .catch(() => console.log("item not added"));
+        
     } else {
       navigate("/login");
     }
@@ -141,9 +139,8 @@ const ProductPageComponent = () => {
       .then(() => {
         setCart([...dummy]);
         setItemIncluded(false);
-        console.log("item removed");
       })
-      .catch(() => console.log("item not removed"));
+     
   }
   if(!product){
     return <Box 
@@ -186,9 +183,13 @@ const ProductPageComponent = () => {
                     cursor:" pointer",
                     margin:"1rem 0"
                   }}
-                  onMouseEnter={()=>{handleImageHover(image)}}
+                  onMouseEnter={()=>handleImageHover(image)}
                   >
-                  <img src={image} key={image}/>
+                  <img src={image} key={image}
+                  style={{
+                    pointerEvents:"none"
+                  }}
+                  />
                   </Box>
                 })
               }
