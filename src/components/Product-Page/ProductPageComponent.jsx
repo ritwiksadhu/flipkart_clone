@@ -32,22 +32,22 @@ const ProductPageComponent = () => {
         .then((data) => {
           setProduct({ ...data })
           setActiveImage(data.images[0])
-        });
+        })
+        .catch(()=>setProduct(null))
     })();
     // getProductDetails()
-  }, []);
+  }, [productId]);
 
   
   useEffect(() => {
     if (cart && product) {
       cart.forEach((elem) => {
-        if (elem.id == product.id) {
+        if (elem.id === product.id) {
           setItemIncluded(true);
         }
       });
-      console.log(cart);
     }
-  }, [cart, product]);
+  }, [cart,product]);
 
   const handleImageHover = (image) => {
     if (!isThrottled) {
@@ -56,7 +56,6 @@ const ProductPageComponent = () => {
 
       setTimeout(() => {
         setIsThrottled(false);
-        console.log("we are ready again")
       }, 300);
     }
   };
@@ -69,6 +68,7 @@ const ProductPageComponent = () => {
     width: "97%",
     margin: "58px auto 0 auto",
     background: "fff",
+
     ".left": {
       width: "40%",
       marginLeft: "2rem",
@@ -82,6 +82,17 @@ const ProductPageComponent = () => {
     ".right": {
       width:"60%",
       margin: "1rem",
+    },
+    [theme.breakpoints.down("md")]:{
+      flexDirection:"column",
+      ".left":{
+        width:"100%",
+        margin:"0",
+      },
+      ".right":{
+        margin:"0",
+        width:"100%"
+      },
     },
   }));
 
@@ -110,9 +121,9 @@ const ProductPageComponent = () => {
       })
         .then(() => {
           setCart([...cart, product]);
-          console.log("item added");
+         
         })
-        .catch(() => console.log("item not added"));
+        
     } else {
       navigate("/login");
     }
@@ -128,11 +139,25 @@ const ProductPageComponent = () => {
       .then(() => {
         setCart([...dummy]);
         setItemIncluded(false);
-        console.log("item removed");
       })
-      .catch(() => console.log("item not removed"));
+     
   }
-
+  if(!product){
+    return <Box 
+    style={{
+        backgroundColor:"#ECF0F3",
+        height:"100vh",
+        width:"100vw",
+        display:"grid",
+        placeContent:"center"
+    }}
+     >
+        <Box style={{textAlign:"center"}}
+        >
+          <img height="500px" src="https://cdn.dribbble.com/users/3512533/screenshots/14168376/media/1357b33cb4057ecb3c6f869fc977561d.jpg?compress=1&resize=1000x750&vertical=top" alt="" />
+        </Box>
+    </Box>
+}
 
 
 
@@ -158,9 +183,13 @@ const ProductPageComponent = () => {
                     cursor:" pointer",
                     margin:"1rem 0"
                   }}
-                  onMouseEnter={()=>{handleImageHover(image)}}
+                  onMouseEnter={()=>handleImageHover(image)}
                   >
-                  <img src={image} key={image}/>
+                  <img src={image} key={image}
+                  style={{
+                    pointerEvents:"none"
+                  }}
+                  />
                   </Box>
                 })
               }

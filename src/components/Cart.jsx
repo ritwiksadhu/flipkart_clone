@@ -4,9 +4,11 @@ import { useAuthData } from '../context/AuthProvider'
 import Paper from '@mui/material/Paper';
 import {useContextData} from "../context/ContextProvider"
 import { styled } from "@mui/material/styles";
+import { db } from '../firebase/firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 const Cart = () => {
-    const {cart,removeItemFromCart} = useAuthData()
+    const {cart,removeItemFromCart,currentUser,setCart} = useAuthData()
     const {roundedPrice} =  useContextData()
 
     const [totalPrice,setTotalPrice] = useState(0)
@@ -95,15 +97,51 @@ const Cart = () => {
         top:"80vh",
         height:"5rem",
         width:"80%",
-        border:"1px solid red",
-        margin:"0 5%",
+        margin:"0 10%",
         display:"flex",
         justifyContent:"space-between",
         alignItems:"center",
         padding:"0 1rem"
     }))
 
-    
+    async function orderNowFunction() {
+        let docRef = doc(db, "user", currentUser.uid);
+        await setDoc(docRef, {
+          createdBy: currentUser.uid,
+          cart: [],
+        })
+          .then(() => {
+            setCart([]);
+            console.log("items ordered");
+          })
+          .catch(() => console.log("item not removed"));
+      }
+
+if(cart?.length === 0){
+    return <Box 
+    style={{
+        backgroundColor:"white",
+        height:"100vh",
+        width:"100vw",
+        display:"grid",
+        placeContent:"center"
+    }}
+     >
+        <Box style={{textAlign:"center"}}
+        >
+        <img height="250px"  src="https://rukminim1.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90" class="_2giOt4"></img>
+        <Typography 
+        style={{ fontSize:"1.2rem",marginTop:"1rem"}}>
+            Your Cart is empty!
+        </Typography>
+        <Typography 
+        style={{ fontSize:".8rem",marginTop:"1rem"}}>
+           Add items to it Now!
+        </Typography>
+        </Box>
+    </Box>
+}
+
 
 
   return (
@@ -192,7 +230,7 @@ const Cart = () => {
             { "$ " + (actualPrice)?.toFixed(2)}/-
           </Typography>
         </Box>
-        <Button style={{background:"#fb641b",color:"white",borderRadius:"0"}} >Order Now</Button>
+        <Button onClick={orderNowFunction} style={{background:"#fb641b",color:"white",borderRadius:"0"}} >Order Now</Button>
     </OrderNow>
     </>
   )

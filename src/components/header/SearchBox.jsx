@@ -41,7 +41,7 @@ const SearchBox = () => {
   function closeSuggestions(){
     setTimeout(() => {
       setInputOpen(false)
-    }, 200);
+    }, 300);
   }
 
   return (
@@ -71,7 +71,7 @@ const SearchBox = () => {
         position:"absolute",
         top:"100%",
         color:"black",
-        background:blue[50],
+        background:"#fff",
         width:"100%",
         zindex:"3"
       }}

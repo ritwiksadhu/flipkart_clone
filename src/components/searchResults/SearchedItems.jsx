@@ -84,7 +84,22 @@ const SearchedItems = () => {
 
   }
 
-
+  if(searchResultData.products?.length === 0){
+    return <Box 
+    style={{
+        backgroundColor:"#ECF0F3",
+        height:"100vh",
+        width:"100vw",
+        display:"grid",
+        placeContent:"center"
+    }}
+     >
+        <Box style={{textAlign:"center"}}
+        >
+          <img height="500px" src="https://cdn.dribbble.com/users/3512533/screenshots/14168376/media/1357b33cb4057ecb3c6f869fc977561d.jpg?compress=1&resize=1000x750&vertical=top" alt="" />
+        </Box>
+    </Box>
+}
   return (
 <SearchItemsContainer>
 <p>Showing {" "}
@@ -113,14 +128,20 @@ style={{
 {
   searchResultData.products?.length >0 ? searchResultData.products.map((element)=> <SearchedItem key={element.id}  data={element}/>):"no data found"
 }
-<Button
-onClick={handlePrevious}
-disable={previousDisable}
->previous</Button>
-<Button
-onClick={handleNext}
-disable={nextDisable}
->Next</Button>
+{
+  searchResultData.products?.length <= 10 ? <Button
+  onClick={handlePrevious}
+  disable={previousDisable}
+  >previous</Button> :""
+}
+{
+  searchResultData.products?.length >= 10 ? 
+  <Button
+  onClick={handleNext}
+  disable={nextDisable}
+  >Next</Button> :""
+}
+
 </SearchItemsContainer>
   )
 }

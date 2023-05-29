@@ -19,15 +19,15 @@ const StyleProvider = ({ children }) => {
     border: "1px solid #2874f0 ",
     borderRadius: "1px",
     fontSize: ".9rem",
-    padding: ".2rem 2.5rem",
+    padding: ".2rem 7%",
     textTransform: "capitalize",
     height:"2rem",
     cursor:"pointer",
     
     "&:hover": {
-      color: "#fff",
+      border:"1px solid blue",
       backgroundColor: blue[600],
-      border: blue[600],
+      color:"#fff"
     },
   }));
 
@@ -156,7 +156,16 @@ const StyleProvider = ({ children }) => {
         alignItems:"center",
         width: "15rem",
         transition:"all 1s ease",
-
+        "& a":{
+          width:"100%",
+          textAlign:"center",
+          padding:"1rem 0",
+          fontSize:"1.2rem"
+        },
+        "& .cartBadge":{
+          color:"black",
+          background:"white",
+        },
         "& button":{
           color:"black",
           borderBottom:"1px solid rgb(220,220,220)",
@@ -186,7 +195,9 @@ const StyleProvider = ({ children }) => {
     
     borderBottom:"1px solid rgba(198,198,198,1)",
     "&::-webkit-scrollbar" : {
-      display: "none"
+      display: "none",
+    justifyContent: "flex-start",
+
     },
     [theme.breakpoints.down("lg")]:{
       width:"80%"
@@ -313,6 +324,19 @@ const StyleProvider = ({ children }) => {
   const SubmitBtnStyle = styled(Button)(({theme})=>({
 
   }))
+  const SearchedSuggestionWrapper = styled(Button)(({theme})=>({
+    height:"fit-content",
+    width:"100%",
+    display:"flex",
+    alignItems:"center",
+    marginTop:".5rem",
+    border:"none",
+    cursor:"pointer",
+    pointerEvents:"none",
+    "&:hover":{
+        background:blue[100]
+    }
+  }))
 
 
   const value = {
@@ -341,6 +365,7 @@ const StyleProvider = ({ children }) => {
     AuthRightwrapper,
     AuthRightForm,
     SubmitBtnStyle,
+    SearchedSuggestionWrapper
   };
 
 

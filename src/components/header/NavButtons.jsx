@@ -4,6 +4,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useStyleData } from "../../context/StyleProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthData } from "../../context/AuthProvider";
+import {red } from "@mui/material/colors";
 
 const NavButtons = ({responsiveClass}) => {
   const { LoginButton, NavButtonBoxStyled, HtmlTooltip } = useStyleData();
@@ -22,6 +23,7 @@ const NavButtons = ({responsiveClass}) => {
     }, 300);
   }
 
+  
 
   
   return (
@@ -80,21 +82,24 @@ const NavButtons = ({responsiveClass}) => {
       <Link to={"/cart"}
       style={{
         textDecoration:"none",
-        color:"white"
+        color:"white",
       }}
       >
         <Badge
           sx={{
             "& .MuiBadge-badge": {
               color: "white",
-              backgroundColor: "red",
+              backgroundColor: red[500],
             },
           }}
+          className="cartBadge"
           badgeContent={cart?.length}
           max={9}
         >
-          <ShoppingCartIcon />
-          <Box variant="span">Cart</Box>
+          <ShoppingCartIcon 
+          />
+          <Box variant="span"
+          >Cart</Box>
         </Badge>
       </Link>
     </NavButtonBoxStyled>
