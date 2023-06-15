@@ -88,7 +88,7 @@ const LogInPage = () => {
               margin: "1rem",
             }}
           >
-            Get access to your Orders, Wishlist and Recommendations
+            Log in to Get access to your Cart
           </Typography>
           <img
             src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/login_img_c4a81e.png"

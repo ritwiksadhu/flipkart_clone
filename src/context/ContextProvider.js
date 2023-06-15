@@ -20,7 +20,6 @@ const ContextProvider = ({children}) => {
   }
   function roundedPrice(price,discount) {
     let result = (price * discount) / 100
-    
     return result
   }
 

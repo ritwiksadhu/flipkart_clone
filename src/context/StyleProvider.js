@@ -196,13 +196,10 @@ const StyleProvider = ({ children }) => {
     borderBottom:"1px solid rgba(198,198,198,1)",
     "&::-webkit-scrollbar" : {
       display: "none",
-    justifyContent: "flex-start",
-
     },
     [theme.breakpoints.down("lg")]:{
-      width:"80%"
+      justifyContent:"flex-start",
     },
-
   }));
 
   const ProductCategoryCard = styled(Box)(({ theme }) => ({
